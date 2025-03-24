@@ -1,2 +1,2 @@
 # CPlib
-Collections of various algorithms, data structures and just cool ideas I've used and use in competitive programming!
+A collection of various algorithms, data structures, and cool ideas I use in competitive programming!
