@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define sz(_v) ((int)((_v).size()))
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
