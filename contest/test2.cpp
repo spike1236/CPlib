@@ -50,17 +50,52 @@ int64_t now() {
     return ms.count();
 }
 
-void solve() {
+struct Solution {
+    void read() {
+    }
+  
+    void solve(stringstream& out) {
+    }
+};
+
+const int MAXTHREADS = 8;
+const int MAXTESTS = 1e5 + 10;
+
+stringstream out[MAXTESTS];
+mutex mut;
+int cur, CNT_TESTS;
+thread threads[MAXTHREADS];
+
+void solutionRunner() {
+    while (true) {
+        Solution s;
+        int id;
+        mut.lock();
+        if (cur >= CNT_TESTS) {
+            mut.unlock();
+            return;
+        }
+        id = cur;
+        cur++;
+        s.read();
+        mut.unlock();
+        s.solve(out[id]);
+    }
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int CNT_TESTS = 1;
-    // cin >> CNT_TESTS;
-    for(int NUMCASE = 1; NUMCASE <= CNT_TESTS; ++NUMCASE) {
-        solve();
-        cout << '\n';
+    cin >> CNT_TESTS;
+    for (int i = 0; i < MAXTHREADS; i++) {
+        threads[i] = thread(solutionRunner);
+    }
+    for (int i = 0; i < MAXTHREADS; i++) {
+        threads[i].join();
+    }
+    for (int i = 0; i < CNT_TESTS; i++) {
+        // cout << "Case #" << i + 1 << ": " << '\n';
+        cout << out[i].str() << '\n';
     }
     return 0;
 }
