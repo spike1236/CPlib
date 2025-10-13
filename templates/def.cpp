@@ -9,24 +9,6 @@ using namespace std;
 
 // template <typename T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-template <class Fun>
-class y_combinator_result {
-    Fun fun_;
-public:
-    template <class T>
-    explicit y_combinator_result(T&& fun) : fun_(forward<T>(fun)) {}
-    
-    template <class... Args>
-    decltype(auto) operator()(Args&&... args) {
-        return fun_(ref(*this), forward<Args>(args)...);
-    }
-};
-
-template <class Fun>
-decltype(auto) y_combinator(Fun&& fun) {
-    return y_combinator_result<decay_t<Fun>>(forward<Fun>(fun));
-}
-
 using ll = long long;
 using ld = long double;
 using pii = pair<int, int>;
