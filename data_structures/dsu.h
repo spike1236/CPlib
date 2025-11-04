@@ -5,8 +5,9 @@ struct DSU {
 
     void rollback(int t) {
 		while(sz(st) > t) {
-            if(st.back().f) sz[st.back().s.f] = sz[st.back().s.s];
-            else par[st.back().s.f] = st.back().s.s;
+            if(st.back().first) sz[st.back().second.first] = sz[st.back().second.second];
+            else par[st.back().second.first] = st.back().second.second;
+            st.pop_back();
         }
 	}
 
@@ -18,7 +19,7 @@ struct DSU {
     }
     
     int get(int v) {
-        return par[v] = ( v == par[v] ? v : get(par[v]));
+        return par[v] = ( v == par[v] ? v : get(par[v])); // ! (rollbacks)
     }
 
     bool unite(int v, int u) {
