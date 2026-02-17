@@ -1,6 +1,6 @@
-mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-long long myRand(long long B) {
-	return (unsigned long long)rng() % B;
+mt19937 rnd(chrono::steady_clock::now().time_since_epoch().count());
+long long myRand() {
+	return rnd();
 }
 
 struct node {
@@ -60,7 +60,7 @@ void split(node* root, node*& l, node*& r, int k) { // after execution l will ha
 
 void merge(node*& root, node* l, node* r) {
     push(l);
-    push(r)
+    push(r);
     if (!l || !r) {
         root = l ? l : r;
         return;
