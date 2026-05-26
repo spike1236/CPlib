@@ -4,7 +4,7 @@ struct DSU {
     vector<pair<int, pii>> st;
 
     void rollback(int t) {
-		while(sz(st) > t) {
+		while(ssize(st) > t) {
             if(st.back().first) sz[st.back().second.first] = sz[st.back().second.second];
             else par[st.back().second.first] = st.back().second.second;
             st.pop_back();
